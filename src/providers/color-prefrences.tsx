@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 
-type Colors = 'blue' | 'green' | '';
+type Colors = 'maroon' | 'skyblue' | 'gold' | '';
 
 type ColorPrefrencesContext = {
   color: Colors;

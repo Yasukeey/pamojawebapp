@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { MdLightMode } from 'react-icons/md';
-import { BsLaptop } from 'react-icons/bs';
+import { MdDarkMode } from "react-icons/md";
 
 const PreferencesDialog = () => {
   const { setTheme, theme } = useTheme();
@@ -47,7 +47,7 @@ const PreferencesDialog = () => {
             <Typography
               variant='p'
               className='pb-4'
-              text='Choose if slackzz appearance should be light or dark, or follow the computer settings'
+              text='Pick your style — Light, Dark, or follow your device mood.'
             />
             <div className='flex flex-wrap gap-3'>
               <Button
@@ -67,7 +67,7 @@ const PreferencesDialog = () => {
                   theme === 'dark' && 'border-blue-600'
                 )}`}
               >
-                <BsLaptop className='mr-2' size={20} />
+                <MdDarkMode className='mr-2' size={20} />
                 <Typography text='Dark' variant='p' />
               </Button>
               <Button
@@ -83,7 +83,7 @@ const PreferencesDialog = () => {
             </div>
             <hr className='bg-gray-200 my-5' />
             <Typography
-              text='Single Color'
+              text='Layout Color'
               variant='p'
               className='py-2 font-bold'
             />
@@ -91,17 +91,24 @@ const PreferencesDialog = () => {
             <div className='flex flex-wrap gap-5'>
               <Button
                 variant='outline'
-                onClick={() => selectColor('green')}
-                className='w-full hover:border-green-800 border-2'
+                onClick={() => selectColor('maroon')}
+                className='w-full hover:border-[maroon] border-2'
               >
-                Green
+                Maroon
               </Button>
               <Button
                 variant='outline'
-                onClick={() => selectColor('blue')}
-                className='w-full hover:border-blue-800 border-2'
+                onClick={() => selectColor('skyblue')}
+                className='w-full hover:border-sky-400 border-2'
               >
-                Blue
+                Skyblue
+              </Button>
+              <Button
+                variant='outline'
+                onClick={() => selectColor('gold')}
+                className='w-full hover:border-yellow-500 border-2'
+              >
+                Gold
               </Button>
               <Button
                 variant='outline'

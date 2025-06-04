@@ -16,18 +16,18 @@ const NoDataScreen: FC<{
   return (
     <div className='w-full h-[calc(100vh-63px)] p-4'>
       <Typography
-        text={`👋 Welcome to the # ${workspaceName} workspace`}
+        text={`😌 Welcome to the > ${workspaceName} < workspace`}
         variant='h3'
       />
       <Typography
-        text='Get started by creating a channel or direct message'
+        text='Enhance Umoja by creating a Circle or engage directly on Dms'
         variant='p'
         className='my-3'
       />
 
       <div className='w-fit'>
         <Button className='w-full my-2' onClick={() => setDialogOpen(true)}>
-          <Typography text='Create Channel' variant='p' />
+          <Typography text='Create Circle' variant='p' />
         </Button>
       </div>
 

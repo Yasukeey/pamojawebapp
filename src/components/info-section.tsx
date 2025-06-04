@@ -34,17 +34,21 @@ const InfoSection: FC<{
   const router = useRouter();
 
   let backgroundColor = 'bg-primary-light';
-  if (color === 'green') {
-    backgroundColor = 'bg-green-900';
-  } else if (color === 'blue') {
-    backgroundColor = 'bg-blue-900';
+  if (color === 'maroon') {
+    backgroundColor = 'bg-maroon-900';
+  } else if (color === 'skyblue') {
+    backgroundColor = 'bg-skyblue-900';
+  } else if (color === 'gold') {
+    backgroundColor = 'bg-gold-900';
   }
 
   let secondayBg = 'bg-primary-dark';
-  if (color === 'green') {
-    secondayBg = 'bg-green-700';
-  } else if (color === 'blue') {
-    secondayBg = 'bg-blue-700';
+  if (color === 'maroon') {
+    secondayBg = 'bg-maroon-700';
+  } else if (color === 'skyblue') {
+    secondayBg = 'bg-skyblue-700';
+  } else if (color === 'gold') {
+    secondayBg = 'bg-gold-700';
   }
 
   const navigateToChannel = (channelId: string) => {
@@ -74,7 +78,7 @@ const InfoSection: FC<{
             <div className='flex items-center justify-between'>
               <CollapsibleTrigger className='flex items-center gap-2'>
                 {isChannelCollapsed ? <FaArrowDown /> : <FaArrowUp />}
-                <Typography variant='p' text='Channels' className='font-bold' />
+                <Typography variant='p' text='Circles' className='font-bold' />
               </CollapsibleTrigger>
               <div
                 className={cn(
@@ -92,7 +96,7 @@ const InfoSection: FC<{
                   <Typography
                     key={channel.id}
                     variant='p'
-                    text={`# ${channel.name}`}
+                    text={`🧩 ${channel.name}`}
                     className={cn(
                       'px-2 py-1 rounded-sm cursor-pointer',
                       `hover:${secondayBg}`,
@@ -118,7 +122,7 @@ const InfoSection: FC<{
                 {isDirectMessageCollapsed ? <FaArrowDown /> : <FaArrowUp />}
                 <Typography
                   variant='p'
-                  text='Direct messages'
+                  text='Direct Messages'
                   className='font-bold'
                 />
               </CollapsibleTrigger>

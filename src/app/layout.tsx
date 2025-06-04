@@ -10,8 +10,8 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: 'Slackzz',
-  description: 'Slack clone codewithlari',
+  title: 'Pamoja',
+  description: 'A Web-Based Collaboration Platform',
 };
 
 export const revalidate = 0;

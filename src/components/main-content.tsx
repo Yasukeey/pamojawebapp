@@ -11,10 +11,12 @@ const MainContent: FC<{ children: ReactNode }> = ({ children }) => {
   const { color } = useColorPrefrences();
 
   let backgroundColor = 'bg-primary-dark';
-  if (color === 'green') {
-    backgroundColor = 'bg-green-700';
-  } else if (color === 'blue') {
-    backgroundColor = 'bg-blue-700';
+  if (color === 'maroon') {
+    backgroundColor = 'bg-maroon-700';
+  } else if (color === 'skyblue') {
+    backgroundColor = 'bg-skyblue-700';
+  } else if (color === 'gold') {
+    backgroundColor = 'bg-gold-700';
   }
 
   return (

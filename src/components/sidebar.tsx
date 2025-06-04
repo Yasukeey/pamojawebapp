@@ -42,10 +42,12 @@ const Sidebar: FC<SidebarProps> = ({
   const { color } = useColorPrefrences();
 
   let backgroundColor = 'bg-primary-dark';
-  if (color === 'green') {
-    backgroundColor = 'bg-green-700';
-  } else if (color === 'blue') {
-    backgroundColor = 'bg-blue-700';
+  if (color === 'maroon') {
+    backgroundColor = 'bg-maroon-700';
+  } else if (color === 'skyblue') {
+    backgroundColor = 'bg-skyblue-700';
+  } else if (color === 'gold') {
+    backgroundColor = 'bg-gold-700';
   }
 
   return (
@@ -132,7 +134,7 @@ const Sidebar: FC<SidebarProps> = ({
                               <GoDotFill className='text-green-600' size='17' />
                             )}
                             <span className='text-xs'>
-                              {userData.is_away ? 'Away' : 'Active'}
+                              {userData.is_away ? 'Inactive' : 'Active'}
                             </span>
                           </div>
                         </div>
@@ -151,8 +153,8 @@ const Sidebar: FC<SidebarProps> = ({
                           variant='p'
                           text={
                             userData.is_away
-                              ? 'Set yourself as active'
-                              : 'Set yourself as away'
+                              ? 'Show me as active'
+                              : 'Show me as inactive'
                           }
                           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
                         />
@@ -170,7 +172,7 @@ const Sidebar: FC<SidebarProps> = ({
                         <PreferencesDialog />
                         <hr className='bg-gray-400' />
                         <div className='flex gap-2 items-center hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'>
-                          <IoDiamondOutline className='text-orange-400' />
+                          <IoDiamondOutline className='text-yellow-400' />
                           <Typography
                             variant='p'
                             text={`Upgrade ${currentWorkspaceData.name}`}

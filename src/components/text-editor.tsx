@@ -47,7 +47,7 @@ const TextEditor: FC<TextEditorProps> = ({
     extensions: [
       StarterKit,
       PlaceHolder.configure({
-        placeholder: `Message #${channel?.name ?? 'USERNAME'}`,
+        placeholder: `Message 🧩${channel?.name ?? 'USERNAME'}`,
       }),
     ],
     autofocus: true,

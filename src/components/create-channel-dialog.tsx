@@ -37,7 +37,7 @@ const CreateChannelDialog: FC<{
   const formSchema = z.object({
     name: z
       .string()
-      .min(2, { message: 'Channel name must be at least 2 characters long' }),
+      .min(4, { message: 'Circle name must be at least 4 characters long' }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,7 +61,7 @@ const CreateChannelDialog: FC<{
       setIsSubmitting(false);
       setDialogOpen(false);
       form.reset();
-      toast.success('Channel created successfully');
+      toast.success('Circle created successfully');
     } catch (error) {
       setIsSubmitting(false);
     }
@@ -75,7 +75,7 @@ const CreateChannelDialog: FC<{
       <DialogContent>
         <DialogHeader>
           <DialogTitle className='my-4'>
-            <Typography text='Create channel' variant='h3' />
+            <Typography text='Create Circle' variant='h3' />
           </DialogTitle>
         </DialogHeader>
 
@@ -87,14 +87,14 @@ const CreateChannelDialog: FC<{
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Typography text='Channel name' variant='p' />
+                    <Typography text='Circle name' variant='p' />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder='Channel Name' {...field} />
+                    <Input placeholder='Circle Name' {...field} />
                   </FormControl>
                   <FormDescription>
                     <Typography
-                      text='This is your channel name'
+                      text='This is your circle name'
                       variant='p'
                       className='mb-4'
                     />

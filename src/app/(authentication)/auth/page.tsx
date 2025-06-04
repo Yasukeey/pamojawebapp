@@ -1,6 +1,6 @@
 'use client';
 
-import { BsSlack } from 'react-icons/bs';
+import { BsPuzzle } from "react-icons/bs";
 import { FcGoogle } from 'react-icons/fc';
 import { RxGithubLogo } from 'react-icons/rx';
 import { useForm } from 'react-hook-form';
@@ -46,7 +46,7 @@ const AuthPage = () => {
   }, [router]);
 
   const formSchema = z.object({
-    email: z.string().email().min(2, { message: 'Email must be 2 characters' }),
+    email: z.string().email({message: "Provide a valid email"}).min(3, { message: 'Email must be atleast 3 characters' }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -84,18 +84,18 @@ const AuthPage = () => {
     <div className='min-h-screen p-5 grid text-center place-content-center bg-white'>
       <div className='max-w-[450px]'>
         <div className='flex justify-center items-center gap-3 mb-4'>
-          <BsSlack size={30} />
-          <Typography text='Slackzz' variant='h2' />
+          <BsPuzzle size={55} />
+          <Typography text='Pamoja' variant='h2' />
         </div>
 
         <Typography
-          text='Sign in to your Slackzz'
+          text='Sign in tuwe Pamoja'
           variant='h2'
           className='mb-3'
         />
 
         <Typography
-          text='We suggest using the email address that you use at work'
+          text='Well suited to use your Professional Email.'
           variant='p'
           className='opacity-90 mb-7'
         />
@@ -145,7 +145,7 @@ const AuthPage = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder='name@work-email.com' {...field} />
+                        <Input placeholder='yourname@email.com' {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -164,7 +164,7 @@ const AuthPage = () => {
                   <div className='text-gray-500 flex items-center space-x-3'>
                     <MdOutlineAutoAwesome />
                     <Typography
-                      text='We will email you a magic link for a password-free sign-in'
+                      text='Sign in link will be sent to your email, tuwe Pamoja'
                       variant='p'
                     />
                   </div>

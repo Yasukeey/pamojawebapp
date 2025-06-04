@@ -33,7 +33,7 @@ const CreateWorkspace = () => {
     <div className='w-screen h-screen grid place-content-center bg-neutral-800 text-white'>
       <div className='p-3 max-w-[550px]'>
         <Typography
-          text={`step ${currStep} of 2`}
+          text={`Step ${currStep} of 2`}
           variant='p'
           className='text-neutral-400'
         />
@@ -52,12 +52,12 @@ const Step1 = () => {
   return (
     <>
       <Typography
-        text='What is the name of your company or team'
+        text='What is the name that brings your group Pamoja/Company Name ?'
         className='my-4'
       />
 
       <Typography
-        text='This will be the name of your Slackzz workspace - choose something that your team will recognize.'
+        text='This name defines your home on Pamoja — keep it familiar and inclusive.'
         className='text-neutral-300'
         variant='p'
       />
@@ -99,9 +99,9 @@ const Step2 = () => {
     setIsSubmitting(false);
     if (error?.error) {
       console.log(error);
-      return toast.error("Couldn't create workspace. Please try again.");
+      return toast.error("Couldn't create your Workspace. Please try again.");
     }
-    toast.success('Workspace created successfully');
+    toast.success('Workspace created successfully, tuwe Pamoja');
     router.push('/');
   };
 
@@ -117,9 +117,9 @@ const Step2 = () => {
       </Button>
 
       <form>
-        <Typography text='Add workspace avatar' className='my-4' />
+        <Typography text='Add Workspace avatar' className='my-4' />
         <Typography
-          text='This image can be changed later in your workspace settings.'
+          text='You can changed it later in your workspace settings.'
           className='text-neutral-300'
           variant='p'
         />
@@ -154,7 +154,7 @@ const Step2 = () => {
                 size='sm'
                 className='text-white bg-gray-500'
               >
-                <Typography text='Select an Image' variant='p' />
+                <Typography text='Select Image' variant='p' />
               </Button>
             )}
           </div>

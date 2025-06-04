@@ -38,8 +38,8 @@ const CreateWorkspace = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formSchema = z.object({
-    name: z.string().min(2, {
-      message: 'Workspace name should be at least 2 characters long',
+    name: z.string().min(4, {
+      message: 'Workspace name should be at least 4 characters long',
     }),
   });
 
@@ -67,7 +67,7 @@ const CreateWorkspace = () => {
     updateImageUrl('');
     setIsOpen(false);
     router.refresh();
-    toast.success('Workspace created successfully');
+    toast.success('Workspace Ready. Tuwe Pamoja');
   }
 
   return (
@@ -86,7 +86,7 @@ const CreateWorkspace = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle className='my-4'>
-            <Typography variant='h4' text='Create workspace' />
+            <Typography variant='h4' text='Create Workspace' />
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
@@ -97,15 +97,15 @@ const CreateWorkspace = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    <Typography text='Name' variant='p' />
+                    <Typography text='Title' variant='p' />
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder='Your company name' {...field} />
+                    <Input placeholder='Your Pamoja Group Name' {...field} />
                   </FormControl>
                   <FormDescription>
                     <Typography
                       variant='p'
-                      text='This is your workspace name'
+                      text='This is the name of your workspace'
                     />
                   </FormDescription>
                   <FormMessage />
@@ -116,7 +116,7 @@ const CreateWorkspace = () => {
             <ImageUpload />
 
             <Button disabled={isSubmitting} type='submit'>
-              <Typography variant='p' text='Submit' />
+              <Typography variant='p' text='Create' />
             </Button>
           </form>
         </Form>
