@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { getUserData } from '@/actions/get-user-data';
-import { supabaseServerClient } from '@/supabase/supabaseServer';
+import { createSupabaseServerClient } from '@/supabase/supabaseServer';
 
 function getPagination(page: number, size: number) {
   const limit = size ? +size : 10;
@@ -13,7 +13,7 @@ function getPagination(page: number, size: number) {
 
 export async function GET(req: Request) {
   try {
-    const supabase = await supabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     const userData = await getUserData();
 
     if (!userData) return new NextResponse('Unauthorized', { status: 401 });
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
         `and(user_one.eq.${userId}), user_two.eq.${recipientId}, and(user_one.eq.${recipientId}), user_two.eq.${userId})`
       )
       .range(from, to)
-      .order('created_at', { ascending: true });
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error fetching direct messages', error);

@@ -18,9 +18,11 @@ const DirectMessage = async ({
 
   if (!userData) return redirect('/auth');
 
-  const [userWorkspacesData] = await getUserWorkspaceData(userData.workspaces!);
+  const userWorkspacesData = await getUserWorkspaceData(userData.workspaces!);
 
-  const [currentWorkspaceData] = await getCurrentWorksaceData(workspaceId);
+  const currentWorkspaceData = await getCurrentWorksaceData(workspaceId);
+
+  if (!currentWorkspaceData) return redirect('/auth');
 
   const userWorkspaceChannels = await getUserWorkspaceChannels(
     workspaceId,

@@ -1,10 +1,10 @@
-import { supabaseServerClient } from '@/supabase/supabaseServer';
+import { createSupabaseServerClient } from '@/supabase/supabaseServer';
 
 export const addMemberToWorkspace = async (
   userId: string,
   workspaceId: number
 ) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   //   Update the workspace members
   const { data: addMemberToWorkspaceData, error: addMemberToWorkspaceError } =

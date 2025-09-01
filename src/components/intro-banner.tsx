@@ -9,13 +9,13 @@ type IntroBannerProps = {
 
 const IntroBanner: FC<IntroBannerProps> = ({ creationDate, name, type }) => {
   const channelMessge = creationDate
-    ? `You created this channel on ${format(
+    ? `You created this Circle on ${format(
         new Date(creationDate),
         'd MMM yyyy'
-      )}. This is the very beginning of the ${name} channel. This channel is for everything ${name}. Hold meetings, share docs, and make decisions together.`
+      )}. This is the very beginning of the ${name} circle. This circle is for everything ${name}. Bringing people Pamoja.`
     : '';
 
-  const directMessage = `This is the beginning of your direct message history with ${name}. Use this space to share thoughts, files, and more.`;
+  const directMessage = `This is the beginning of your Dms history with ${name}. Use this space to share thoughts, files, and more.`;
 
   return (
     <div className='px-2 mb-5'>

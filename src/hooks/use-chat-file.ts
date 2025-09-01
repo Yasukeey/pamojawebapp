@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { supabaseBrowserClient } from '@/supabase/supabaseClient';
+import { createClient } from '@/supabase/supabaseClient';
 
 export const useChatFile = (filePath: string) => {
   const [publicUrl, setPublicUrl] = useState('');
@@ -10,7 +10,7 @@ export const useChatFile = (filePath: string) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const supabase = supabaseBrowserClient;
+  const supabase = createClient();
 
   useEffect(() => {
     const fetchFile = async () => {

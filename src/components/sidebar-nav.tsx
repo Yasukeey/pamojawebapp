@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 
 type SidebarNavProps = {
   userWorkspacesData: Workspace[];
-  currentWorkspaceData: Workspace;
+  currentWorkspaceData: Workspace | null;
 };
 
 const SidebarNav: FC<SidebarNavProps> = ({
@@ -34,12 +34,10 @@ const SidebarNav: FC<SidebarNavProps> = ({
   const { color } = useColorPrefrences();
 
   let backgroundColor = 'bg-primary-dark';
-  if (color === 'maroon') {
-    backgroundColor = 'bg-maroon-700';
-  } else if (color === 'skyblue') {
-    backgroundColor = 'bg-skyblue-700';
-  } else if (color === 'gold') {
-    backgroundColor = 'bg-gold-700';
+  if (color === 'green') {
+    backgroundColor = 'bg-green-700';
+  } else if (color === 'blue') {
+    backgroundColor = 'bg-blue-700';
   }
 
   const switchWorkspace = (id: string) => {
@@ -57,6 +55,53 @@ const SidebarNav: FC<SidebarNavProps> = ({
 
     toast.success('Invite link copied to clipboard');
   };
+
+  const handleHomeClick = () => {
+    router.push('/home');
+  };
+
+  const handleDMsClick = () => {
+    router.push('/direct-messages');
+  };
+
+    // If no current workspace, show a placeholder
+  if (!currentWorkspaceData) {
+    return (
+      <nav>
+        <ul className='flex flex-col space-y-4'>
+          <li>
+            <div className='cursor-pointer items-center text-white mb-4 w-10 h-10 rounded-lg overflow-hidden'>
+              <Popover>
+                <PopoverTrigger>
+                  <Avatar>
+                    <AvatarFallback className='bg-neutral-700'>
+                      <Typography
+                        variant='p'
+                        text="+"
+                      />
+                    </AvatarFallback>
+                  </Avatar>
+                </PopoverTrigger>
+                <PopoverContent className='p-0' side='bottom'>
+                  <Card className='w-[350px] border-0'>
+                    <CardContent className='flex p-0 flex-col'>
+                      <div className='p-4 text-center'>
+                        <Typography
+                          variant='p'
+                          text="No workspace selected"
+                          className='text-gray-600'
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </PopoverContent>
+              </Popover>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
 
   return (
     <nav>
@@ -79,17 +124,17 @@ const SidebarNav: FC<SidebarNavProps> = ({
                   </AvatarFallback>
                 </Avatar>
               </PopoverTrigger>
-              <PopoverContent className='p-0' side='bottom'>
-                <Card className='w-[350px] border-0'>
-                  <CardContent className='flex p-0 flex-col'>
-                    {switchingWorkspace ? (
-                      <div className='m-2'>
-                        <ProgressBar />
-                      </div>
-                    ) : (
-                      userWorkspacesData.map(workspace => {
-                        const isActive =
-                          workspace.id === currentWorkspaceData.id;
+                <PopoverContent className='p-0' side='bottom'>
+                  <Card className='w-[350px] border-0'>
+                    <CardContent className='flex p-0 flex-col'>
+                      {switchingWorkspace ? (
+                        <div className='m-2'>
+                          <ProgressBar />
+                        </div>
+                      ) : (
+                        userWorkspacesData.map(workspace => {
+                          const isActive =
+                            workspace.id === currentWorkspaceData.id;
 
                         return (
                           <div
@@ -146,7 +191,10 @@ const SidebarNav: FC<SidebarNavProps> = ({
               </PopoverContent>
             </Popover>
           </div>
-          <div className='flex flex-col items-center cursor-pointer group text-white'>
+          <div 
+            className='flex flex-col items-center cursor-pointer group text-white'
+            onClick={handleHomeClick}
+          >
             <div className='p-2 rounded-lg bg-[rgba(255,255,255,0.3)]'>
               <RiHome2Fill
                 size={20}
@@ -161,7 +209,10 @@ const SidebarNav: FC<SidebarNavProps> = ({
           </div>
         </li>
         <li>
-          <div className='flex flex-col cursor-pointer items-center group text-white'>
+          <div 
+            className='flex flex-col cursor-pointer items-center group text-white'
+            onClick={handleDMsClick}
+          >
             <div className='flex flex-col items-center cursor-pointer group text-white'>
               <div className='p-2 rounded-lg bg-[rgba(255,255,255,0.3)]'>
                 <PiChatsTeardrop

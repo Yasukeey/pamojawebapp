@@ -41,7 +41,7 @@ const VideoChat: FC<VideoChatProps> = ({ chatId, userData }) => {
       audio={true}
       token={token}
       connect={true}
-      serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_URL}
+      serverUrl={process.env.LIVEKIT_URL}
       data-lk-theme='default'
     >
       <VideoConference />

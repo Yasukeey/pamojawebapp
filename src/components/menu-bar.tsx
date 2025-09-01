@@ -83,7 +83,7 @@ const MenuBar = ({ editor }: { editor: Editor }) => {
       <Popover>
         <PopoverTrigger>
           <button>
-            <BsEmojiSmile size={20} />
+            <BsEmojiSmile size={17} />
           </button>
         </PopoverTrigger>
         <PopoverContent className='w-fit p-0'>

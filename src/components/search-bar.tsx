@@ -38,7 +38,7 @@ const SearchBar: FC<SearchBarProps> = ({
   const { color } = useColorPrefrences();
   const router = useRouter();
 
-  let backGroundColor = 'bg-[#7a4a7f] dark:bg-[#311834]';
+  let backGroundColor = 'bg-[#F5F3F2] dark:bg-[#701f32]';
   if (color === 'green') {
     backGroundColor = 'bg-green-200 dark:bg-green-900';
   } else if (color === 'blue') {
@@ -85,7 +85,7 @@ const SearchBar: FC<SearchBarProps> = ({
         <PopoverTrigger className='flex items-center space-x-2 w-full h-full'>
           <Search size={20} className='text-black dark:text-white' />
           <span className='text-sm text-black dark:text-white'>
-            Search #{currentChannelData?.name ?? 'channel'}
+            Search 🧩{currentChannelData?.name ?? 'channel'}
           </span>
         </PopoverTrigger>
         <PopoverContent className='w-[500px]'>

@@ -39,7 +39,7 @@ export default async function handler(
       .contains('members', [userData.id]);
 
     if (!channelData?.length) {
-      return res.status(403).json({ message: 'Channel not found' });
+      return res.status(403).json({ message: 'Circle not found' });
     }
 
     const { error: creatingMessageError, data } = await supabase

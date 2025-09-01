@@ -21,7 +21,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { MdOutlineAutoAwesome } from 'react-icons/md';
-import { supabaseBrowserClient } from '@/supabase/supabaseClient';
+import { createClient } from '@/supabase/supabaseClient';
 import { registerWithEmail } from '@/actions/register-with-email';
 
 const AuthPage = () => {
@@ -32,9 +32,10 @@ const AuthPage = () => {
 
   useEffect(() => {
     const getCurrUser = async () => {
+      const supabase = createClient();
       const {
         data: { session },
-      } = await supabaseBrowserClient.auth.getSession();
+      } = await supabase.auth.getSession();
 
       if (session) {
         return router.push('/');
@@ -69,7 +70,8 @@ const AuthPage = () => {
 
   async function socialAuth(provider: Provider) {
     setIsAuthenticating(true);
-    await supabaseBrowserClient.auth.signInWithOAuth({
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
       provider,
       options: {
         redirectTo: `${location.origin}/auth/callback`,

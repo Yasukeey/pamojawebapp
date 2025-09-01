@@ -1,11 +1,14 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { GoDot, GoDotFill } from 'react-icons/go';
 import { GiNightSleep } from 'react-icons/gi';
 import { FaPencil } from 'react-icons/fa6';
 import { IoDiamondOutline } from 'react-icons/io5';
+import { useRouter } from 'next/navigation';
+import { createClient } from '@/supabase/supabaseClient';
+import { toast } from 'sonner';
 
 import { User, Workspace } from '@/types/app';
 import SidebarNav from '@/components/sidebar-nav';
@@ -27,10 +30,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Typography from '@/components/ui/typography';
 import { FaRegCalendarCheck } from 'react-icons/fa';
 import PreferencesDialog from '@/components/preferences-dialog';
+import CalendarActivityComponent from '@/components/calendar-activity';
 
 type SidebarProps = {
   userWorksapcesData: Workspace[];
-  currentWorkspaceData: Workspace;
+  currentWorkspaceData: Workspace | null;
   userData: User;
 };
 
@@ -40,15 +44,77 @@ const Sidebar: FC<SidebarProps> = ({
   userData,
 }) => {
   const { color } = useColorPrefrences();
+  const router = useRouter();
+  const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   let backgroundColor = 'bg-primary-dark';
-  if (color === 'maroon') {
-    backgroundColor = 'bg-maroon-700';
-  } else if (color === 'skyblue') {
-    backgroundColor = 'bg-skyblue-700';
-  } else if (color === 'gold') {
-    backgroundColor = 'bg-gold-700';
+  if (color === 'green') {
+    backgroundColor = 'bg-green-700';
+  } else if (color === 'blue') {
+    backgroundColor = 'bg-blue-700';
   }
+
+  const handleStatusToggle = async () => {
+    if (isUpdatingStatus) return;
+    
+    setIsUpdatingStatus(true);
+    try {
+      // In a real app, this would update the user status in the database
+      // For now, we'll just show a toast message
+      const newStatus = !userData.is_away;
+      toast.success(`Status updated to ${newStatus ? 'inactive' : 'active'}`);
+      
+      // Update local state (in a real app, this would come from the database)
+      // You would need to implement a proper state management solution here
+      
+    } catch (error) {
+      toast.error('Failed to update status');
+    } finally {
+      setIsUpdatingStatus(false);
+    }
+  };
+
+  const handleClearStatus = async () => {
+    try {
+      // In a real app, this would clear the user status in the database
+      toast.success('Status cleared');
+      
+      // Update local state (in a real app, this would come from the database)
+      // You would need to implement a proper state management solution here
+      
+    } catch (error) {
+      toast.error('Failed to clear status');
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        toast.error('Failed to sign out');
+        return;
+      }
+      
+      toast.success('Signed out successfully');
+      router.push('/auth');
+    } catch (error) {
+      toast.error('Failed to sign out');
+    }
+  };
+
+  const handleProfileClick = () => {
+    router.push('/profile');
+  };
+
+  const handleUpgradeClick = () => {
+    router.push('/upgrade');
+  };
+
+  const handleCalendarClick = () => {
+    setShowCalendar(!showCalendar);
+  };
 
   return (
     <aside
@@ -157,32 +223,50 @@ const Sidebar: FC<SidebarProps> = ({
                               : 'Show me as inactive'
                           }
                           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleStatusToggle}
                         />
                         <Typography
                           variant='p'
                           text={'Clear Status'}
                           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleClearStatus}
                         />
                         <hr className='bg-gray-400' />
                         <Typography
                           variant='p'
                           text={'Profile'}
                           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleProfileClick}
                         />
+                        <div 
+                          className='flex gap-2 items-center hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleCalendarClick}
+                        >
+                          <FaRegCalendarCheck />
+                          <Typography
+                            variant='p'
+                            text='Calendar Activity'
+                            className='text-xs'
+                          />
+                        </div>
                         <PreferencesDialog />
                         <hr className='bg-gray-400' />
-                        <div className='flex gap-2 items-center hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'>
+                        <div 
+                          className='flex gap-2 items-center hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleUpgradeClick}
+                        >
                           <IoDiamondOutline className='text-yellow-400' />
                           <Typography
                             variant='p'
-                            text={`Upgrade ${currentWorkspaceData.name}`}
+                            text={`Upgrade ${currentWorkspaceData?.name || 'Workspace'}`}
                             className='text-xs'
                           />
                         </div>
                         <Typography
                           variant='p'
-                          text={`Sign out of ${currentWorkspaceData.name}`}
+                          text={`Sign out of ${currentWorkspaceData?.name || 'Workspace'}`}
                           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
+                          onClick={handleSignOut}
                         />
                       </div>
                     </div>
@@ -198,6 +282,19 @@ const Sidebar: FC<SidebarProps> = ({
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
+
+        {/* Calendar Activity Popover */}
+        {showCalendar && currentWorkspaceData && (
+          <Popover open={showCalendar} onOpenChange={setShowCalendar}>
+            <PopoverContent side='right' className="p-0">
+              <CalendarActivityComponent 
+                userId={userData.id} 
+                workspaceId={currentWorkspaceData.id}
+                onNavigate={() => setShowCalendar(false)} 
+              />
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
     </aside>
   );

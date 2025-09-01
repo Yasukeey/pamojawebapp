@@ -1,6 +1,6 @@
 'use server';
 
-import { supabaseServerClient } from '@/supabase/supabaseServer';
+import { createSupabaseServerClient } from '@/supabase/supabaseServer';
 import { getUserData } from './get-user-data';
 
 export const createChannel = async ({
@@ -12,7 +12,7 @@ export const createChannel = async ({
   name: string;
   userId: string;
 }) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
   const userData = await getUserData();
 
   if (!userData) {
@@ -64,7 +64,7 @@ export const createChannel = async ({
 };
 
 export const addChannelToUser = async (userId: string, channelId: string) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data: addChannelData, error: addChannelError } = await supabase.rpc(
     'update_user_channels',
@@ -81,7 +81,7 @@ export const updateChannelMembers = async (
   channelId: string,
   userId: string
 ) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data: updateChannelData, error: updateChannelError } =
     await supabase.rpc('update_channel_members', {
@@ -96,7 +96,7 @@ const updateWorkspaceChannel = async (
   channelId: string,
   workspaceId: string
 ) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data: updateWorkspaceData, error: updateWorkspaceError } =
     await supabase.rpc('add_channel_to_workspace', {
@@ -111,7 +111,7 @@ export const updateChannelRegulators = async (
   userId: string,
   channelId: string
 ) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data: updateChannelData, error: updateChannelError } =
     await supabase.rpc('update_channel_regulators', {

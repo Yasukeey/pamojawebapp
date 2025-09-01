@@ -28,8 +28,8 @@ const config = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          dark: '#451c49', //MAKE SURE TO UPDATE THE COLOR
-          light: '#311834',
+          dark: '#5C1A2A', //Background COLOR
+          light: '#4F1723',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',

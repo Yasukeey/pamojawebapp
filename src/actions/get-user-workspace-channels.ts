@@ -1,13 +1,13 @@
 'use server';
 
-import { supabaseServerClient } from '@/supabase/supabaseServer';
+import { createSupabaseServerClient } from '@/supabase/supabaseServer';
 import { Channel } from '@/types/app';
 
 export const getUserWorkspaceChannels = async (
   workspaceId: string,
   userId: string
 ) => {
-  const supabase = await supabaseServerClient();
+  const supabase = await createSupabaseServerClient();
 
   const { data: workspaceData, error: workspaceError } = await supabase
     .from('workspaces')

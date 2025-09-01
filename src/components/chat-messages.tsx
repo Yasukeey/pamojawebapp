@@ -59,11 +59,11 @@ const ChatMessages: FC<ChatMessagesProps> = ({
     addKey:
       type === 'Channel'
         ? `${queryKey}:channel-messages`
-        : `direct_messages:post`,
+        : `direct-message:post`,
     updateKey:
       type === 'Channel'
         ? `${queryKey}:channel-messaegs:update`
-        : `direct_messages:update`,
+        : `direct-message:update`,
     paramValue,
   });
 

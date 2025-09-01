@@ -21,9 +21,11 @@ const ChannelId = async ({
 
   if (!userData) return redirect('/auth');
 
-  const [userWorkspaceData] = await getUserWorkspaceData(userData.workspaces!);
+  const userWorkspaceData = await getUserWorkspaceData(userData.workspaces!);
 
-  const [currentWorkspaceData] = await getCurrentWorksaceData(workspaceId);
+  const currentWorkspaceData = await getCurrentWorksaceData(workspaceId);
+
+  if (!currentWorkspaceData) return redirect('/auth');
 
   const userWorkspaceChannels = await getUserWorkspaceChannels(
     currentWorkspaceData.id,
@@ -49,7 +51,7 @@ const ChannelId = async ({
         socketUrl='/api/web-socket/messages'
         socketQuery={{
           channelId: currentChannelData.id,
-          workspaceId: currentWorkspaceData,
+          workspaceId: currentWorkspaceData.id,
         }}
         apiUrl='/api/messages'
         headerTitle={currentChannelData.name}

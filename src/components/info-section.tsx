@@ -34,21 +34,17 @@ const InfoSection: FC<{
   const router = useRouter();
 
   let backgroundColor = 'bg-primary-light';
-  if (color === 'maroon') {
-    backgroundColor = 'bg-maroon-900';
-  } else if (color === 'skyblue') {
-    backgroundColor = 'bg-skyblue-900';
-  } else if (color === 'gold') {
-    backgroundColor = 'bg-gold-900';
+  if (color === 'green') {
+    backgroundColor = 'bg-green-900';
+  } else if (color === 'blue') {
+    backgroundColor = 'bg-blue-900';
   }
 
   let secondayBg = 'bg-primary-dark';
-  if (color === 'maroon') {
-    secondayBg = 'bg-maroon-700';
-  } else if (color === 'skyblue') {
-    secondayBg = 'bg-skyblue-700';
-  } else if (color === 'gold') {
-    secondayBg = 'bg-gold-700';
+  if (color === 'green') {
+    secondayBg = 'bg-green-700';
+  } else if (color === 'blue') {
+    secondayBg = 'bg-blue-700';
   }
 
   const navigateToChannel = (channelId: string) => {

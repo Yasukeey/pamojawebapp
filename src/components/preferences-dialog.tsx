@@ -21,14 +21,14 @@ const PreferencesDialog = () => {
       <DialogTrigger asChild>
         <Typography
           className='hover:text-white hover:bg-blue-700 px-2 py-1 rounded cursor-pointer'
-          text='Preferences'
+          text='Personalization'
           variant='p'
         />
       </DialogTrigger>
 
       <DialogContent className='max-w-xs md:w-fit'>
         <DialogTitle>
-          <Typography text='Preferences' variant='h3' className='py-5' />
+          <Typography text='Personalization' variant='h3' className='py-5' />
           <hr className='bg-gray-200' />
         </DialogTitle>
         <Tabs orientation='horizontal' defaultValue='themes'>
@@ -40,7 +40,7 @@ const PreferencesDialog = () => {
           </TabsList>
           <TabsContent className='max-w-xs md:max-w-fit' value='themes'>
             <Typography
-              text='Color Mode'
+              text='Mode'
               variant='p'
               className='py-2 font-bold'
             />
@@ -91,24 +91,17 @@ const PreferencesDialog = () => {
             <div className='flex flex-wrap gap-5'>
               <Button
                 variant='outline'
-                onClick={() => selectColor('maroon')}
-                className='w-full hover:border-[maroon] border-2'
+                onClick={() => selectColor('green')}
+                className='w-full hover:border-green-800 border-2'
               >
-                Maroon
+                Green
               </Button>
               <Button
                 variant='outline'
-                onClick={() => selectColor('skyblue')}
-                className='w-full hover:border-sky-400 border-2'
+                onClick={() => selectColor('blue')}
+                className='w-full hover:border-blue-800 border-2'
               >
-                Skyblue
-              </Button>
-              <Button
-                variant='outline'
-                onClick={() => selectColor('gold')}
-                className='w-full hover:border-yellow-500 border-2'
-              >
-                Gold
+                Blue
               </Button>
               <Button
                 variant='outline'

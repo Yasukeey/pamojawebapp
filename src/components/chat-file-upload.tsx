@@ -21,7 +21,7 @@ import { File } from 'lucide-react';
 
 import { Channel, User, Workspace } from '@/types/app';
 import Typography from './ui/typography';
-import { supabaseBrowserClient } from '@/supabase/supabaseClient';
+import { createClient } from '@/supabase/supabaseClient';
 
 type ChatFileUploadProps = {
   userData: User;
@@ -67,7 +67,7 @@ const ChatFileUpload: FC<ChatFileUploadProps> = ({
     const file = values.file?.[0];
     if (!file) return;
 
-    const supabase = supabaseBrowserClient;
+    const supabase = createClient();
 
     let fileTypePrefix = '';
     if (file.type === 'application/pdf') {

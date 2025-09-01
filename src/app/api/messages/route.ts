@@ -1,5 +1,5 @@
 import { getUserData } from '@/actions/get-user-data';
-import { supabaseServerClient } from '@/supabase/supabaseServer';
+import { createSupabaseServerClient } from '@/supabase/supabaseServer';
 import { NextResponse } from 'next/server';
 
 function getPagination(page: number, size: number) {
@@ -12,7 +12,7 @@ function getPagination(page: number, size: number) {
 
 export async function GET(req: Request) {
   try {
-    const supabase = await supabaseServerClient();
+    const supabase = await createSupabaseServerClient();
     const userData = await getUserData();
     const { searchParams } = new URL(req.url);
     const channelId = searchParams.get('channelId');

@@ -13,6 +13,10 @@ export type User = {
   phone: string | null;
   type: string | null;
   workspaces: string[] | null;
+  subscription_tier: 'free' | 'premium' | 'lifetime';
+  credits_remaining: number;
+  status_message: string | null;
+  last_activity: string | null;
 };
 
 export type Workspace = {
@@ -26,6 +30,7 @@ export type Workspace = {
   regulators: string[] | null;
   slug: string;
   super_admin: string;
+  subscription_tier: 'free' | 'premium' | 'lifetime';
 };
 
 export type Channel = {
@@ -58,4 +63,35 @@ export type SockerIoApiResponse = NextApiResponse & {
       io: SocketIOServer;
     };
   };
+};
+
+export type SubscriptionPlan = {
+  id: string;
+  name: string;
+  duration: '6months' | 'lifetime';
+  price_kes: number;
+  features: string[];
+  credits_per_month?: number;
+};
+
+export type MpesaPayment = {
+  id: string;
+  user_id: string;
+  workspace_id: string;
+  amount: number;
+  phone_number: string;
+  status: 'pending' | 'successful' | 'failed';
+  checkout_request_id: string;
+  created_at: string;
+  subscription_plan_id: string;
+};
+
+export type CalendarActivity = {
+  id: string;
+  user_id: string;
+  workspace_id: string;
+  activity_type: 'message' | 'file_upload' | 'channel_join' | 'status_change';
+  description: string;
+  created_at: string;
+  metadata?: Record<string, any>;
 };
